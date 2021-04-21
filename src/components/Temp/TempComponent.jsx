@@ -1,18 +1,29 @@
 import PropTypes from 'prop-types';
-// import './TempComponent.module.css';
+// import styles from './TempComponent.module.css';
 
-const TempComponent = ({ title, alt }) => (
-    <>
-        <h1 title={title} alt={alt}>This is TempComponent</h1>
-    </>
+const TempComponent = ({ mainProp }) => (
+  <>
+    {mainProp.map(({ prop1 }) => (
+      <h1>{prop1}</h1>
+    ))}
+  </>
 );
 
 TempComponent.defaultProps = {
-    title: 'This is default title from TempComponent'
-}
+  mainProp: 'text',
+};
 TempComponent.propTypes = {
-title: PropTypes.string,
-alt: PropTypes.string.isRequired,
-}
+  mainProp: PropTypes.string,
+  //   prop2: PropTypes.string.isRequired,
+  //
+  //   friends: PropTypes.array.isRequired,
+  //
+  //   friends: PropTypes.arrayOf(
+  //     PropTypes.shape({
+  //       avatar: PropTypes.string,
+  //       name: PropTypes.string.isRequired,
+  //     }),
+  //   ).isRequired,
+};
 
 export default TempComponent;

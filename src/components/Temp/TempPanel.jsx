@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-// import './TempPanel.module.css';
+import styles from './TempPanel.module.css';
 
 const TempPanel = ({ children }) => (
-    <div>Panel {children}</div>
+  <div className={styles.panel}>{children}</div>
 );
 
 TempPanel.propTypes = {
-children: PropTypes.node.isRequired,
-}
+  children: PropTypes.node.isRequired,
+};
 
 export default TempPanel;
