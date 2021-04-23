@@ -1,5 +1,9 @@
-// import TempComponent from './components/Temp/TempComponent';
+import TempClassComponent from './components/TempClassComponent';
 
-const App = () => <></>;
+const App = () => (
+  <>
+    <TempClassComponent />
+  </>
+);
 
 export default App;
