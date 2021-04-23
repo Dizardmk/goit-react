@@ -1,4 +1,4 @@
-import Dropdown from './components/Temp/Dropdown';
+import Dropdown from './components/Dropdown';
 
 const App = () => (
   <>
