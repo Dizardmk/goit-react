@@ -1,5 +1,9 @@
-// import TempComponent from './components/Temp/TempComponent';
+import Dropdown from './components/Temp/Dropdown';
 
-const App = () => <></>;
+const App = () => (
+  <>
+    <Dropdown />
+  </>
+);
 
 export default App;
