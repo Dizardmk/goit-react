@@ -1,10 +1,5 @@
-// import TempComponent from './components/Temp/TempComponent'
+// import TempComponent from './components/Temp/TempComponent';
 
-const App = () => (
-  <>
-    {/* <TempComponent mainProp="text"/> */}
-    {/* <TempComponent mainProp="text"/> */}
-  </>
-);
+const App = () => <></>;
 
 export default App;

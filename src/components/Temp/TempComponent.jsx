@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import styles from './TempComponent.module.css';
 
 const TempComponent = ({ mainProp }) => (
@@ -10,10 +10,10 @@ const TempComponent = ({ mainProp }) => (
 );
 
 TempComponent.defaultProps = {
-  mainProp: 'text',
+  // mainProp: 'text',
 };
 TempComponent.propTypes = {
-  mainProp: PropTypes.string,
+  // mainProp: PropTypes.string,
   //   prop2: PropTypes.string.isRequired,
   //
   //   friends: PropTypes.array.isRequired,
