@@ -1,0 +1,16 @@
+.todoList {
+  list-style: none;
+}
+.item {
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+  border: 1px solid;
+  margin: 10px;
+}
+.text {
+  padding: 10px 15px;
+}
+.button {
+  padding: 5px;
+}

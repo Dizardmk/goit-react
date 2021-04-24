@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class TempClassComponent extends Component {
+class Dropdown extends Component {
   state = {
     visible: false,
   };
@@ -22,4 +22,4 @@ class TempClassComponent extends Component {
   }
 }
 
-export default TempClassComponent;
+export default Dropdown;
