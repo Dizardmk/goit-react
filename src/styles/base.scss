@@ -1,3 +1,5 @@
+// @import 'styles/shared';
+
 *,
 *::before,
 *::after {
@@ -5,7 +7,10 @@
   padding: 0;
 }
 body {
+  // color: $black;
+  // background-color: $white;
   /* font-family: $primary-font; */
+  // line-height: 1.5;
   font-style: normal;
 }
 /* address {
@@ -13,4 +18,6 @@ body {
 } */
 img {
   display: block;
+  // max-width: 100%;
+  // height: auto;
 }
