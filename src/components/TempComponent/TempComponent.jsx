@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types';
-// import styles from './TempComponent.module.css';
+// import styles from './TempComponent.module.scss';
 
 const TempComponent = ({ mainProp }) => (
   <>
@@ -27,3 +27,7 @@ TempComponent.propTypes = {
 };
 
 export default TempComponent;
+
+// npm package classnames
+// import classNames from 'classnames';
+// classNames('defaultClass', 'etc', { dynamicClass: true/false or (condition===value) });
