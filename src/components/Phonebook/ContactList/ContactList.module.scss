@@ -1,0 +1,19 @@
+.list {
+  margin-bottom: 10px;
+}
+.item {
+  line-height: 2;
+  margin-left: 40px;
+}
+.button {
+  background-color: #fff;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 1px 8px;
+  margin-left: 10px;
+
+  &:active {
+    background-color: lightgray;
+  }
+}
