@@ -14,6 +14,11 @@ class TempClassComponent extends Component {
     // если нужно установить value от пропса, то передаем пропс initialValue
     // value: this.props.initialValue,
   };
+  /////////////////////////////////////////////////////
+  //componentDidMount() {}
+  //componentDidUpdate(prevProps, prevState) {}
+  //componentWillUnmount() {}
+  /////////////////////////////////////////////////////
   ///////////////////// Custom methods ///////////////////
   handleIncrement = event => {
     // если нужно добавить значение основываясь на предыдущем значении - функция
