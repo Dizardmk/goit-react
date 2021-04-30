@@ -15,8 +15,8 @@ class App extends Component {
   addContact = (name, number) => {
     const { contacts } = this.state;
     const normalizedName = name.toLowerCase();
-    const addContactFilter = contacts.find(contact =>
-      contact.name.toLowerCase().includes(normalizedName),
+    const addContactFilter = contacts.find(
+      contact => contact.name.toLowerCase() === normalizedName,
     );
     const contact = {
       id: shortid.generate(),
@@ -59,7 +59,7 @@ class App extends Component {
           <ContactEditor onSubmit={this.addContact} />
         </Section>
         <Section title="Contacts">
-          {contacts.length === 0 ? null : (
+          {contacts.length > 0 && (
             <ContactFilter value={filter} onChange={this.changeFilterContact} />
           )}
           <ContactList
