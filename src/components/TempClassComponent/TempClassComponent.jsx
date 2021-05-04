@@ -8,17 +8,18 @@ class TempClassComponent extends Component {
   // static propTypes = {
   //   //
   // };
+
   ///////////////////// STATE (состояние) ///////////////////
   state = {
     value: 0,
     // если нужно установить value от пропса, то передаем пропс initialValue
     // value: this.props.initialValue,
   };
-  /////////////////////////////////////////////////////
+
   //componentDidMount() {}
   //componentDidUpdate(prevProps, prevState) {}
   //componentWillUnmount() {}
-  /////////////////////////////////////////////////////
+
   ///////////////////// Custom methods ///////////////////
   handleIncrement = event => {
     // если нужно добавить значение основываясь на предыдущем значении - функция
@@ -34,6 +35,7 @@ class TempClassComponent extends Component {
       value: prevState.value - 1,
     }));
   };
+
   ///////////////////// RENDER ///////////////////
   render() {
     const { value } = this.state;
