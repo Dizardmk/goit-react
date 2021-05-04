@@ -12,6 +12,17 @@ class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    if (JSON.parse(localStorage.getItem('contacts'))) {
+      this.setState({ contacts: JSON.parse(localStorage.getItem('contacts')) });
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = (name, number) => {
     const { contacts } = this.state;
     const normalizedName = name.toLowerCase();
@@ -30,17 +41,14 @@ class App extends Component {
           contacts: [contact, ...contacts],
         }));
   };
-
   deleteContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
-
   changeFilterContact = event => {
     this.setState({ filter: event.currentTarget.value });
   };
-
   getFilteredContacts = () => {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
