@@ -62,4 +62,8 @@ https://drive.google.com/file/d/1EOewQyS7V9SHsUbbycwgTNqB59jwhFnG/view
 - https://www.npmjs.com/package/prop-types
 - https://www.npmjs.com/package/classnames
 - https://www.npmjs.com/package/shortid or https://www.npmjs.com/package/uuid
+- https://www.npmjs.com/package/axios
 - https://github.com/mhnpd/react-loader-spinner
+
+8) емметы:
+- rcc - создать реакт классовый компонент
