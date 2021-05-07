@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import IconButton from './components/IconButton';
-import { ReactComponent as PlusIcon } from './icons/plus.svg';
-import { ReactComponent as CloseIcon } from './icons/cross.svg';
+import IconButton from '../components/IconButton';
+import { ReactComponent as PlusIcon } from '../icons/plus.svg';
+import { ReactComponent as CloseIcon } from '../icons/cross.svg';
 
-export default class App extends Component {
+export default class IconButtonPage extends Component {
   render() {
     return (
       <>

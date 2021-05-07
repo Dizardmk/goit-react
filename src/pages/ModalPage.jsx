@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-// import Todo from './components/Todo';
-// import Dropdown from './components/Dropdown';
-import Modal from './components/Modal';
+import Modal from '../components/Modal';
 
-class App extends Component {
+export default class ModalPage extends Component {
   state = { showModal: false };
 
   toggleModal = () => {
@@ -32,5 +30,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
