@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-style: normal;
+  padding-left: 20px;
+}
+img {
+  display: block;
+}
+.navigation {
+  display: flex;
+  list-style: none;
+  padding: 20px 0;
+
+  &__item {
+    margin-right: 15px;
+  }
+  &__link {
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 5px;
+  }
+  &__link--active {
+    color: white;
+    background-color: royalblue;
+    border: 1px solid royalblue;
+  }
+}
