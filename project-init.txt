@@ -1,52 +1,13 @@
 1) npx create-react-app .
 
-2) npm install node-sass --save //if you want to use sass
+//if you want to use sass
+2) npm install node-sass --save
 
-3) npm install modern-normalize // Normalize browsers default style
+// normalize browsers default style
+3) npm install modern-normalize
 
 4) Установить линтинг на пре-коммит
 https://github.com/goitacademy/react-lint-config
-- npm install husky --save-dev
-- npx husky install
-- npx husky add .husky/pre-commit "npx lint-staged"
-
-Создать файлы в корне проекта:
-
-.huskyrc
-{
-  "hooks": {
-    "pre-commit": "lint-staged"
-  }
-}
-
-.lintstagedrc
-{
-  "src/**/*.{json,css,scss,md}": ["prettier --write"],
-  "src/**/*.{js,jsx,ts,tsx}": ["prettier --write", "eslint --fix"]
-}
-
-.prettierrc
-{
-  "printWidth": 80,
-  "tabWidth": 2,
-  "useTabs": false,
-  "semi": true,
-  "singleQuote": true,
-  "trailingComma": "all",
-  "bracketSpacing": true,
-  "jsxBracketSameLine": false,
-  "arrowParens": "avoid",
-  "proseWrap": "always"
-}
-
-5) Для комфортной работы, после установки плагинов, нужно добавить несколько настроек редактора для автосохранения и форматирования файлов.
-{
-  "files.autoSave": "onFocusChange",
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  }
-}
 
 6) Деплой приложения ghpages
 https://create-react-app.dev/docs/deployment#github-pages
@@ -65,6 +26,25 @@ https://drive.google.com/file/d/1EOewQyS7V9SHsUbbycwgTNqB59jwhFnG/view
 - https://www.npmjs.com/package/axios
 - https://github.com/mhnpd/react-loader-spinner
 
-8) емметы:
-- rcc - create react class component
-- rsc - create react function component
+8) useful snipets:
+
+imp→	import moduleName from 'module'
+imn→	import 'module'
+imd→	import { destructuredModule } from 'module'
+ima→	import { originalName as aliasName} from 'module'
+impt→	import PropTypes from 'prop-types'
+
+exp→	export default moduleName
+exd→	export { destructuredModule } from 'module'
+
+ss→ this.setState({ })
+ssf→ - this.setState((state, props) => { return {}})
+cp→	const { } = this.props
+cs→	const { } = this.state
+
+cdm→ componentDidMount() {}
+cdu→ componentDidUpdate(prevProps, prevState) {}
+cwun→ componentWillUnmount() {}
+
+rcc→ react class component
+sfc→  stateless function component
