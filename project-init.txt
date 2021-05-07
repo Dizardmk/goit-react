@@ -1,12 +1,15 @@
 1) npx create-react-app .
 
-//if you want to use sass
 2) npm install node-sass --save
+//if you want to use sass
 
-// normalize browsers default style
 3) npm install modern-normalize
+// normalize browsers default style
 
-4) Установить линтинг на пре-коммит
+4) npm install react-router-dom
+// if you want to use router, switch, link and navlink
+
+5) Установить линтинг на пре-коммит
 https://github.com/goitacademy/react-lint-config
 
 6) Деплой приложения ghpages
