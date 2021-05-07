@@ -66,4 +66,5 @@ https://drive.google.com/file/d/1EOewQyS7V9SHsUbbycwgTNqB59jwhFnG/view
 - https://github.com/mhnpd/react-loader-spinner
 
 8) емметы:
-- rcc - создать реакт классовый компонент
+- rcc - create react class component
+- rsc - create react function component
