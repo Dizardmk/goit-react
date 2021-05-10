@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 
 class TempClassComponent extends Component {
-  ///////////////////// STATIC ///////////////////
   // static defaultProps = {
-  //   initialValue: 0,
+  // propName: 'text',
   // };
   // static propTypes = {
-  //   //
+  // propName: PropTypes.string.isRequired,
   // };
 
-  ///////////////////// STATE (состояние) ///////////////////
   state = {
     value: 0,
-    // если нужно установить value от пропса, то передаем пропс initialValue
-    // value: this.props.initialValue,
   };
 
-  //componentDidMount() {}
-  //componentDidUpdate(prevProps, prevState) {}
-  //componentWillUnmount() {}
+  // cdm - componentDidMount() {}
+  // componentDidUpdate(prevProps, prevState) {}
+  // componentWillUnmount() {}
 
   ///////////////////// Custom methods ///////////////////
   handleIncrement = event => {
