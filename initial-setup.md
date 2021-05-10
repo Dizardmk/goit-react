@@ -28,21 +28,19 @@ npm install react-router-dom
 
 ## Линтинг на пре-коммит
 
-> <https://github.com/goitacademy/react-lint-config>
+<https://github.com/goitacademy/react-lint-config>
 
 ## Деплой приложения ghpages
 
 - В `package.json` добавить
   `"homepage": "https://myusername.github.io/my-app",`, например до
   `dependencies`
-- ```sh
-  npm install --save gh-pages
-  ```
+- `npm install --save gh-pages`
 - добавить в `package.json` следующие скрипты: `"predeploy": "npm run build",` и
   `"deploy": "gh-pages -d build",`
 
-> <https://create-react-app.dev/docs/deployment#github-pages> >
-> <https://drive.google.com/file/d/1EOewQyS7V9SHsUbbycwgTNqB59jwhFnG/view>
+<https://create-react-app.dev/docs/deployment#github-pages> >
+<https://drive.google.com/file/d/1EOewQyS7V9SHsUbbycwgTNqB59jwhFnG/view>
 
 ## Полезные npm пакеты:
 
