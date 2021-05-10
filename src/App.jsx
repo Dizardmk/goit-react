@@ -1,92 +1,54 @@
-import homepage from './pages/HomePage';
-import dropdown from './pages/DropdownPage';
-import iconbutton from './pages/IconButtonPage';
-import modal from './pages/ModalPage';
-import tabs from './pages/Tabs';
-import todo from './pages/TodoPage';
-import router from './pages/RouterPage';
-import notfound from './pages/NotFoundPage';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import routes from './routes';
+import AppBar from './components/AppBar';
+
+const HomePage = lazy(() =>
+  import('./pages/HomePage' /* webpackChunkName: "home-page" */),
+);
+const DropdownPage = lazy(() =>
+  import('./pages/DropdownPage' /* webpackChunkName: "dropdown-page" */),
+);
+const IconButtonPage = lazy(() =>
+  import('./pages/IconButtonPage' /* webpackChunkName: "iconbutton-page" */),
+);
+const ModalPage = lazy(() =>
+  import('./pages/ModalPage' /* webpackChunkName: "modal-page" */),
+);
+const TabsPage = lazy(() =>
+  import('./pages/TabsPage' /* webpackChunkName: "tabs-page" */),
+);
+const TodoPage = lazy(() =>
+  import('./pages/TodoPage' /* webpackChunkName: "todo-page" */),
+);
+const BooksPage = lazy(() =>
+  import('./pages/BooksPage' /* webpackChunkName: "books-page" */),
+);
+const BookDetailPage = lazy(() =>
+  import('./pages/BookDetailPage' /* webpackChunkName: "books-detail-page" */),
+);
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage' /* webpackChunkName: "notfound-page" */),
+);
 
 const App = () => (
   <>
-    <ul className="navigation">
-      <li className="navigation__item">
-        <NavLink
-          exact
-          to="/"
-          className="navigation__link"
-          activeClassName="navigation__link--active"
-        >
-          home
-        </NavLink>
-      </li>
-      <li className="navigation__item">
-        <NavLink
-          to="/dropdown"
-          className="navigation__link"
-          activeClassName="navigation__link--active"
-        >
-          dropdown
-        </NavLink>
-      </li>
-      <li className="navigation__item">
-        <NavLink
-          to="/iconbutton"
-          className="navigation__link"
-          activeClassName="navigation__link--active"
-        >
-          iconbutton
-        </NavLink>
-      </li>
-      <li className="navigation__item">
-        <NavLink
-          to="/modal"
-          className="navigation__link"
-          activeClassName="navigation__link--active"
-        >
-          modal
-        </NavLink>
-      </li>
-      <li className="navigation__item">
-        <NavLink
-          to="/tabs"
-          className="navigation__link"
-          activeClassName="navigation__link--active"
-        >
-          tabs
-        </NavLink>
-      </li>
-      <li className="navigation__item">
-        <NavLink
-          to="/todo"
-          className="navigation__link"
-          activeClassName="navigation__link--active"
-        >
-          todo
-        </NavLink>
-      </li>
-      <li className="navigation__item">
-        <NavLink
-          to="/router"
-          className="navigation__link"
-          activeClassName="navigation__link--active"
-        >
-          router
-        </NavLink>
-      </li>
-    </ul>
+    <AppBar />
 
-    <Switch>
-      <Route path="/" component={homepage} exact />
-      <Route path="/dropdown" component={dropdown} />
-      <Route path="/iconbutton" component={iconbutton} />
-      <Route path="/modal" component={modal} />
-      <Route path="/tabs" component={tabs} />
-      <Route path="/todo" component={todo} />
-      <Route path="/router" component={router} />
-      <Route component={notfound} />
-    </Switch>
+    {/* <Suspense fallback={<Spinner/>}> */}
+    <Suspense fallback={<h1>Loading... 😵</h1>}>
+      <Switch>
+        <Route path={routes.home} component={HomePage} exact />
+        <Route path={routes.dropdown} component={DropdownPage} />
+        <Route path={routes.iconbutton} component={IconButtonPage} />
+        <Route path={routes.modal} component={ModalPage} />
+        <Route path={routes.tabs} component={TabsPage} />
+        <Route path={routes.todo} component={TodoPage} />
+        <Route path={routes.bookDetail} component={BookDetailPage} />
+        <Route path={routes.books} component={BooksPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Suspense>
   </>
 );
 
