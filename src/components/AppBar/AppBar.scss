@@ -1,0 +1,21 @@
+.navigation {
+  display: flex;
+  list-style: none;
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+
+  &__item {
+    margin-right: 15px;
+  }
+  &__link {
+    color: black;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 5px;
+  }
+  &__link--active {
+    color: #007bff;
+    font-weight: 600;
+  }
+}

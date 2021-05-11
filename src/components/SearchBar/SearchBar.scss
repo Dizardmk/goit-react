@@ -1,0 +1,17 @@
+.searchBar {
+  padding: 20px 0;
+
+  &__input {
+    height: 50px;
+    padding: 0 10px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+  }
+  &__input:focus {
+    outline-color: #007bff;
+  }
+
+  &__button {
+    margin-left: 15px;
+  }
+}
