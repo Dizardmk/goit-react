@@ -3,18 +3,20 @@ import { Route, Link } from 'react-router-dom';
 import routes from '../routes';
 import API from '../api/themoviedb';
 import Spinner from '../components/Spinner';
+import MovieCast from '../components/MovieCast';
+import MovieReviews from '../components/MovieReviews';
 import './MovieDetailsPage.scss';
 
 export default class MovieDetailsPage extends Component {
   state = {
-    isLoading: false,
-    error: null,
     image: null,
     title: null,
     year: null,
     rating: null,
     overview: null,
     genres: [],
+    error: null,
+    isLoading: false,
   };
 
   async componentDidMount() {
@@ -32,7 +34,6 @@ export default class MovieDetailsPage extends Component {
   }
 
   render() {
-    const { movieId } = this.props.match.params;
     const { url } = this.props.match;
     const {
       title,
@@ -66,7 +67,10 @@ export default class MovieDetailsPage extends Component {
                 <h1>
                   {title} ({year})
                 </h1>
-                <p className="movieInfo__score">User Score: {rating}%</p>
+                <p className="movieInfo__score">
+                  User Score:{' '}
+                  {rating === 0 ? 'No rating here yet 🙈' : `${rating}%`}
+                </p>
                 <h2>Overview</h2>
                 <p className="movieInfo__overview">{overview}</p>
                 <h3>Genres</h3>
@@ -84,8 +88,8 @@ export default class MovieDetailsPage extends Component {
                 </li>
               </ul>
             </div>
-            <Route path={routes.movieCast} render={() => <h1>Cast</h1>} />
-            <Route path={routes.movieReviews} render={() => <h1>Reviews</h1>} />
+            <Route path={routes.movieCast} component={MovieCast} />
+            <Route path={routes.movieReviews} component={MovieReviews} />
           </div>
         )}
       </>

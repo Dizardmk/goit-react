@@ -40,19 +40,19 @@ const moviesApi = {
     return adaptData;
   },
   // get movie credits
-  // async getMovieCredits(movieId) {
-  //   const response = await axios.get(
-  //     `/movie/${movieId}/credits?api_key=${API_KEY}`,
-  //   );
-  //   return response;
-  // },
+  async getMovieCredits(movieId) {
+    const { data } = await axios.get(
+      `/movie/${movieId}/credits?api_key=${API_KEY}`,
+    );
+    return data.cast;
+  },
   // get movie reviews
-  // async getMovieReviews(movieId) {
-  //   const response = await axios.get(
-  //     `/movie/${movieId}/reviews?api_key=${API_KEY}`,
-  //   );
-  //   return response;
-  // },
+  async getMovieReviews(movieId) {
+    const { data } = await axios.get(
+      `/movie/${movieId}/reviews?api_key=${API_KEY}`,
+    );
+    return data.results;
+  },
 };
 
 export default moviesApi;
