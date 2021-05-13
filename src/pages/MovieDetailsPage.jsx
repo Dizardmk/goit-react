@@ -17,12 +17,18 @@ export default class MovieDetailsPage extends Component {
     genres: [],
     error: null,
     isLoading: false,
+    savedLocation: null,
   };
 
   async componentDidMount() {
-    const { movieId } = this.props.match.params;
+    const { location } = this.props;
+
+    location.state && location.state.from
+      ? this.setState({ savedLocation: location.state.from })
+      : this.setState({ savedLocation: routes.movies });
 
     try {
+      const { movieId } = this.props.match.params;
       this.setState({ isLoading: true });
       const movieDetails = await API.getMovieDetails(movieId);
       return this.setState({ ...movieDetails });
@@ -32,6 +38,22 @@ export default class MovieDetailsPage extends Component {
       this.setState({ isLoading: false });
     }
   }
+
+  handleGoBack = () => {
+    const { history, location } = this.props;
+
+    // if (location.state && location.state.from) {
+    //   return history.push(location.state.from);
+    // }
+    // history.push(routes.movies);
+
+    location.state && location.state.from
+      ? history.push(location.state.from)
+      : history.push(routes.movies);
+
+    // NEW ECMA 2020 SPEC - Optional chaining
+    // history.push(location?.state?.from || routes.movies);
+  };
 
   render() {
     const { url } = this.props.match;
@@ -44,6 +66,7 @@ export default class MovieDetailsPage extends Component {
       year,
       error,
       isLoading,
+      savedLocation,
     } = this.state;
 
     return (
@@ -52,8 +75,12 @@ export default class MovieDetailsPage extends Component {
         {isLoading && <Spinner />}
         {!isLoading && (
           <div className="content">
-            <button className="button" type="button">
-              go back
+            <button
+              className="button"
+              type="button"
+              onClick={this.handleGoBack}
+            >
+              Go back
             </button>
             <div className="movieDetail">
               <div className="poster">
@@ -81,10 +108,24 @@ export default class MovieDetailsPage extends Component {
               <p className="additional__title">Additional information</p>
               <ul className="additional__list">
                 <li>
-                  <Link to={`${url}/cast`}>Cast</Link>
+                  <Link
+                    to={{
+                      pathname: `${url}/cast`,
+                      state: { from: savedLocation },
+                    }}
+                  >
+                    Cast
+                  </Link>
                 </li>
                 <li>
-                  <Link to={`${url}/reviews`}>Reviews</Link>
+                  <Link
+                    to={{
+                      pathname: `${url}/reviews`,
+                      state: { from: savedLocation },
+                    }}
+                  >
+                    Reviews
+                  </Link>
                 </li>
               </ul>
             </div>

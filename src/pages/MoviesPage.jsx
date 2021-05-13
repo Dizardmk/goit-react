@@ -12,6 +12,14 @@ export default class MoviesPage extends Component {
     isLoading: false,
   };
 
+  componentDidMount() {
+    const searchParams = this.props.location.search;
+    const parsedParams = new URLSearchParams(searchParams);
+    const queryValue = parsedParams.get('query');
+    if (queryValue) {
+      this.setState({ searchQuery: queryValue });
+    }
+  }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchQuery !== this.state.searchQuery) {
       this.searchMovies();
@@ -19,10 +27,9 @@ export default class MoviesPage extends Component {
   }
 
   searchMovies = async () => {
-    const { searchQuery } = this.state;
-
     try {
       this.setState({ isLoading: true });
+      const { searchQuery } = this.state;
       const searchingMovies = await API.searchMovies(searchQuery);
       return this.setState({ searchingMovies });
     } catch (error) {
@@ -32,7 +39,11 @@ export default class MoviesPage extends Component {
     }
   };
   onChangeQuery = query => {
+    if (!query) return;
     this.setState({ searchQuery: query, error: null });
+    this.props.history.push({
+      search: `query=${query}`,
+    });
   };
 
   render() {

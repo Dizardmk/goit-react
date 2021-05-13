@@ -1,10 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import routes from '../../routes';
 
-const MovieItem = ({ title, id }) => (
+const MovieItem = ({ title, id, location }) => (
   <li>
-    <Link to={`${routes.movies}/${id}`}>{title}</Link>
+    <Link
+      to={{
+        pathname: `${routes.movies}/${id}`,
+        state: { from: location },
+      }}
+    >
+      {title}
+    </Link>
   </li>
 );
 
-export default MovieItem;
+export default withRouter(MovieItem);

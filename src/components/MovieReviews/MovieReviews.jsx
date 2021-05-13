@@ -1,38 +1,35 @@
 import React, { Component } from 'react';
 import API from '../../api/themoviedb';
 import Spinner from '../Spinner';
+import './MovieReviews.scss';
 
 export default class MovieReviews extends Component {
   state = {
     movieReviews: [],
     error: null,
     isLoading: false,
-    componentMounted: false,
+    // componentMounted: false,
   };
 
   async componentDidMount() {
-    const { movieId } = this.props.match.params;
-
     try {
       this.setState({ isLoading: true });
-      //////////////////////////////////////////////////
-      this.setState({ componentMounted: true });
-      console.log(this.state.componentMounted);
-
-      if (this.state.componentMounted) {
-        const movieReviews = await API.getMovieReviews(movieId);
-        return this.setState({ movieReviews });
-      }
-      ////////////////////////////////////////////////////
+      // this.setState({ componentMounted: true });
+      // console.log('after set true', this.state.componentMounted);
+      // if (this.state.componentMounted) {
+      const { movieId } = this.props.match.params;
+      const movieReviews = await API.getMovieReviews(movieId);
+      return this.setState({ movieReviews });
+      // }
     } catch (error) {
       this.setState({ error });
     } finally {
       this.setState({ isLoading: false });
     }
   }
-  componentWillUnmount() {
-    this.setState({ componentMounted: false });
-  }
+  // componentWillUnmount() {
+  //   // this.setState({ componentMounted: false });
+  // }
 
   render() {
     const { movieReviews, error, isLoading } = this.state;
@@ -46,10 +43,10 @@ export default class MovieReviews extends Component {
         ) : (
           <div>
             {movieReviews.map(({ id, author, content }) => (
-              <ul key={id}>
-                <li>
-                  <h4>Author: {author}</h4>
-                  <p>{content}</p>
+              <ul className="reviews" key={id}>
+                <li className="reviews__item">
+                  <h4 className="reviews__author">Author: {author}</h4>
+                  <p className="reviews__text">{content}</p>
                 </li>
               </ul>
             ))}

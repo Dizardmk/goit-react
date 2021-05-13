@@ -1,0 +1,13 @@
+.reviews {
+  padding: 10px;
+  &__item {
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  &__author {
+    margin-bottom: 5px;
+  }
+  // &__text {
+  // }
+}
