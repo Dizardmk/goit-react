@@ -1,4 +1,4 @@
-## Создать react приложение
+## Создать React приложение
 
 ```sh
 npx create-react-app .
@@ -12,46 +12,88 @@ npm install node-sass --save
 
 ## Подключить Normalize
 
-Подключать в главный index.js: `import 'modern-normalize/modern-normalize.css';`
+Подключать в главный `index.js` файл:
+`import 'modern-normalize/modern-normalize.css';`
 
 ```sh
 npm install modern-normalize
 ```
 
-## Подключить router, switch, link and navlink
+## Подключить BrowserRouter (Router, Switch, Link, Navlink)
 
-Поместить `<App>` в `<BrowserRouter>...</BrowserRouter>` в index.js
+Поместить `<App>` в `<BrowserRouter>...</BrowserRouter>` в главный `index.js`
 
 ```sh
 npm install react-router-dom
 ```
 
-## Линтинг на пре-коммит
+## Линтинг на pre-commit
 
 <https://github.com/goitacademy/react-lint-config>
 
-## Деплой приложения ghpages
+## Деплой приложения на Netlify
 
-- В `package.json` добавить
-  `"homepage": "https://myusername.github.io/my-app",`, например до
-  `dependencies`
-- `npm install --save gh-pages`
-- добавить в `package.json` следующие скрипты: `"predeploy": "npm run build",` и
-  `"deploy": "gh-pages -d build",`
+В корне проекта создать файл `netlify.toml` cо следующими настройками:
 
-<https://create-react-app.dev/docs/deployment#github-pages> >
+```sh
+[build]
+publish="build"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+```
+
+Далее вводим в терминале следующие команды:
+
+```sh
+npm install netlify-cli -g
+```
+
+Затем нам нужно залогиниться в свою учетку (откроется браузер, с подтверждением
+авторизации. Жмем кнопку `Authorize`, и закрываем вкладку). Для этого в
+терминале пишем:
+
+```sh
+netlify login
+```
+
+Далее, в файле `package.json` добавим npm-скрипты для деплоя:
+`"predeploy": "npm run build",` и `"deploy": "netlify deploy -p",`
+
+Если у Вас в `package.json` еще осталось свойство
+`"homepage": "https://myusername.github.io/my-app",` - его необходимо удалить.
+
+## Деплой приложения на Github - ghpages (не будет работать с BrowserRouter)
+
+В файле `package.json`, до `"dependencies"`, добавить следующую строчку:
+`"homepage": "https://myusername.github.io/my-app",`
+
+В терминале прописать команду `npm install --save gh-pages`
+
+Добавить в `package.json` следующие скрипты: `"predeploy": "npm run build",` и
+`"deploy": "gh-pages -d build",`
+
+Инструкции:
+
+<https://create-react-app.dev/docs/deployment#github-pages>
 <https://drive.google.com/file/d/1EOewQyS7V9SHsUbbycwgTNqB59jwhFnG/view>
 
-## Полезные npm пакеты:
+## Полезные npm пакеты
 
 - <https://www.npmjs.com/package/prop-types>
 - <https://www.npmjs.com/package/classnames>
-- <https://www.npmjs.com/package/shortid> or
+- <https://www.npmjs.com/package/shortid> или
   <https://www.npmjs.com/package/uuid>
 - <https://www.npmjs.com/package/axios>
 - <https://github.com/mhnpd/react-loader-spinner>
 
-## Useful snipets:
+## Полезные сниппеты
+
+Для работы, нужно установить два расширения:
+<https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets>
+<https://marketplace.visualstudio.com/items?itemName=burkeholland.simple-react-snippets>
 
 - `imp`→ import moduleName from 'module'
 - `imn`→ import 'module' imd→ import { destructuredModule } from 'module'
