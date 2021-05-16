@@ -1,0 +1,11 @@
+@import 'styles/shared';
+
+.contactFilter {
+  &__title {
+    @extend %title;
+  }
+
+  &__input {
+    @extend %input;
+  }
+}

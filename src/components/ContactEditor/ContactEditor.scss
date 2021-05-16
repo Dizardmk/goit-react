@@ -1,0 +1,32 @@
+@import 'styles/shared';
+
+.contactEditor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  padding: 15px;
+
+  &__title {
+    @extend %title;
+  }
+
+  &__input {
+    @extend %input;
+  }
+
+  &__button {
+    cursor: pointer;
+    color: #fff;
+    background-color: $accent-color;
+    border: 1px solid $accent-color;
+    border-radius: 4px;
+    padding: 5px;
+
+    &:active {
+      background-color: $dark-accent-color;
+    }
+  }
+}
