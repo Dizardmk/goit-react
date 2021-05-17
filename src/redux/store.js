@@ -1,11 +1,52 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import contactsReducer from './contacts/contacts-reducer';
 
-const rootReducer = combineReducers({
-  contacts: contactsReducer,
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+];
+
+const contactsPersistConfig = {
+  key: 'contacts',
+  storage,
+  blacklist: ['filter'],
+};
+
+const store = configureStore({
+  reducer: {
+    contacts: persistReducer(contactsPersistConfig, contactsReducer),
+  },
+  middleware,
+  devTools: process.env.NODE_ENV === 'development',
 });
 
-const store = createStore(rootReducer, composeWithDevTools());
+const persistor = persistStore(store);
+// eslint-disable-next-line
+export default { store, persistor };
 
-export default store;
+//////////// WITHOUT REDUX - PERSIST ////////////////////
+// import { configureStore } from '@reduxjs/toolkit';
+// import contactsReducer from './contacts/contacts-reducer';
+
+// const store = configureStore({
+//   reducer: {
+//     contacts: contactsReducer,
+//   },
+//   devTools: process.env.NODE_ENV === 'development',
+// });
+
+// export default store;

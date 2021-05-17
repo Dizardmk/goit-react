@@ -1,43 +1,31 @@
 import { combineReducers } from 'redux';
-import types from './contacts-types';
+import { createReducer } from '@reduxjs/toolkit';
+import * as actions from './contacts-actions';
 
-const items = (state = [], { type, payload }) => {
-  ///////////////////////// ADD
-  if (type === types.ADD) {
-    const addContactFilter = state.find(
-      ({ name }) => name.toLowerCase() === payload.name.toLowerCase(),
-    );
-    if (addContactFilter) {
-      alert(`${payload.name} is already in contacts.`);
-      return state;
-    }
-    return [...state, payload];
-  }
-  ///////////////////////// DELETE
-  if (type === types.DELETE) {
-    return state.filter(({ id }) => id !== payload);
-  }
-  ///////////////////////// DEFAULT
-  return state;
+const items = createReducer([], {
+  ///////////////////////////// ADD
+  [actions.addContact]: (state, { payload }) =>
+    state.find(({ name }) => name.toLowerCase() === payload.name.toLowerCase())
+      ? alert(`${payload.name} is already in contacts.`)
+      : [...state, payload],
+  // {
+  //   const addContactFilter = state.find(
+  //     ({ name }) => name.toLowerCase() === payload.name.toLowerCase(),
+  //   );
+  //   if (addContactFilter) {
+  //     alert(`${payload.name} is already in contacts.`);
+  //     return state;
+  //   }
+  //   return [...state, payload];
+  // },
+  ///////////////////////////// DELETE
+  [actions.deleteContact]: (state, { payload }) =>
+    state.filter(({ id }) => id !== payload),
+});
 
-  // switch (type) {
-  //   case types.ADD: return [...state, payload];
-  //   case types.DELETE: return state.filter(({ id }) => id !== payload);
-  //   default: return state;
-  // }
-};
-
-const filter = (state = '', { type, payload }) => {
-  return type === types.CHANGE_FILTER ? payload : state;
-
-  // if (type === types.CHANGE_FILTER) {return payload;}
-  // return state;
-
-  // switch (type) {
-  //   case types.CHANGE_FILTER: return payload;
-  //   default: return state;
-  // }
-};
+const filter = createReducer('', {
+  [actions.changeFilterContact]: (_state, { payload }) => payload,
+});
 
 export default combineReducers({
   items,
