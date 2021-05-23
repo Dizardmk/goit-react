@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as contactsActions from '../../redux/contacts/contacts-actions';
+import * as contactsOperations from '../../redux/contacts/contacts-operations';
 import './ContactEditor.scss';
 
 class TodoEditor extends Component {
@@ -13,12 +13,21 @@ class TodoEditor extends Component {
     const { name, value } = event.currentTarget;
     this.setState({ [name]: value });
   };
+
   handleSubmit = event => {
     event.preventDefault();
+
+    // contacts duplicate check
+    const { contacts, onSubmit } = this.props;
     const { name, number } = this.state;
-    this.props.onSubmit(name, number);
+
+    contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())
+      ? alert(`${name} is alredy in contacts`)
+      : onSubmit(name, number);
+
     this.resetForm();
   };
+
   resetForm = () => {
     this.setState({ name: '', number: '' });
   };
@@ -61,9 +70,13 @@ class TodoEditor extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) =>
-    dispatch(contactsActions.addContact(name, number)),
+const mapStateToProps = state => ({
+  contacts: state.contacts.items,
 });
 
-export default connect(null, mapDispatchToProps)(TodoEditor);
+const mapDispatchToProps = dispatch => ({
+  onSubmit: (name, number) =>
+    dispatch(contactsOperations.addContact(name, number)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoEditor);

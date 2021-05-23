@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "modern-normalize": "^1.1.0",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
@@ -22,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "netlify deploy -p"
+    "deploy": "netlify deploy -p",
+    "api": "json-server --watch db.json --port 4040 --delay 300"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +46,7 @@
   },
   "devDependencies": {
     "husky": "^6.0.0",
+    "json-server": "^0.16.3",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.0"
   }

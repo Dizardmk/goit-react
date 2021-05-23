@@ -3,31 +3,37 @@ import { createReducer } from '@reduxjs/toolkit';
 import * as actions from './contacts-actions';
 
 const items = createReducer([], {
-  ///////////////////////////// ADD
-  [actions.addContact]: (state, { payload }) =>
-    state.find(({ name }) => name.toLowerCase() === payload.name.toLowerCase())
-      ? alert(`${payload.name} is already in contacts.`)
-      : [...state, payload],
-  // {
-  //   const addContactFilter = state.find(
-  //     ({ name }) => name.toLowerCase() === payload.name.toLowerCase(),
-  //   );
-  //   if (addContactFilter) {
-  //     alert(`${payload.name} is already in contacts.`);
-  //     return state;
-  //   }
-  //   return [...state, payload];
-  // },
-  ///////////////////////////// DELETE
-  [actions.deleteContact]: (state, { payload }) =>
+  // get
+  [actions.getContactsSuccess]: (_state, { payload }) => payload,
+  // add
+  [actions.addContactSuccess]: (state, { payload }) => [...state, payload],
+  // delete
+  [actions.deleteContactSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });
 
+// filter
 const filter = createReducer('', {
   [actions.changeFilterContact]: (_state, { payload }) => payload,
+});
+
+const loading = createReducer(false, {
+  // get
+  [actions.getContactsRequest]: () => true,
+  [actions.getContactsSuccess]: () => false,
+  [actions.getContactsError]: () => false,
+  // add
+  [actions.addContactRequest]: () => true,
+  [actions.addContactSuccess]: () => false,
+  [actions.addContactError]: () => false,
+  // delete
+  [actions.deleteContactRequest]: () => true,
+  [actions.deleteContactSuccess]: () => false,
+  [actions.deleteContactError]: () => false,
 });
 
 export default combineReducers({
   items,
   filter,
+  loading,
 });
