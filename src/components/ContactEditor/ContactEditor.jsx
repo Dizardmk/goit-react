@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import * as contactsOperations from '../../redux/contacts/contacts-operations';
+import { addContact } from '../../redux/contacts/contacts-operations';
+import { getContacts } from '../../redux/contacts/contacts-selectors';
 import './ContactEditor.scss';
 
 class TodoEditor extends Component {
@@ -71,12 +72,11 @@ class TodoEditor extends Component {
 }
 
 const mapStateToProps = state => ({
-  contacts: state.contacts.items,
+  contacts: getContacts(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) =>
-    dispatch(contactsOperations.addContact(name, number)),
+  onSubmit: (name, number) => dispatch(addContact(name, number)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoEditor);
