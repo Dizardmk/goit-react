@@ -7,7 +7,7 @@ npx create-react-app .
 ## Sass
 
 ```sh
-npm install node-sass --save
+npm install sass
 ```
 
 ## Normalize
@@ -66,22 +66,6 @@ npm install redux-persist
 ```
 
 ## Redux DevTools
-
-Если используете `Redux Toolkit`, DevTools устанавливать не нужно.
-
-```sh
-npm install --save-dev redux-devtools-extension
-```
-
-В `store.js` добавить:
-
-```sh
-import { createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-const store = createStore(reducer, composeWithDevTools());
-```
-
 Расширение для Google Chrome -
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
