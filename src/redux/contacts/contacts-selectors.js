@@ -3,8 +3,17 @@ import { createSelector } from '@reduxjs/toolkit';
 // all contacts
 export const getContacts = state => state.contacts.items;
 
+// all contacts length
+export const getContactsLenght = state => {
+  const contacts = getContacts(state);
+  return contacts.length;
+};
+
 // filter
 export const getFilter = state => state.contacts.filter;
+
+// loading
+export const getLoading = state => state.contacts.loading;
 
 // memoize filtered contacts
 export const getFilteredContacts = createSelector(

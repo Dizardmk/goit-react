@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as contactsOperations from './redux/contacts/contacts-operations';
+import { getContacts } from './redux/contacts/contacts-operations';
+import {
+  getContactsLenght,
+  getLoading,
+} from './redux/contacts/contacts-selectors';
 import Section from './components/Section';
 import ContactEditor from './components/ContactEditor';
 import ContactFilter from './components/ContactFilter';
@@ -13,14 +17,14 @@ class App extends Component {
   }
 
   render() {
-    const { contacts, isLoadingContacts } = this.props;
+    const { contactsLenght, isLoadingContacts } = this.props;
     return (
       <>
         <Section title="Phonebook">
           <ContactEditor />
         </Section>
         <Section title="Contacts">
-          {contacts.length > 0 && <ContactFilter />}
+          {contactsLenght > 0 && <ContactFilter />}
           <ContactList />
         </Section>
         {isLoadingContacts && <Spinner />}
@@ -30,12 +34,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  contacts: state.contacts.items,
-  isLoadingContacts: state.contacts.loading,
+  contactsLenght: getContactsLenght(state),
+  isLoadingContacts: getLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  getContacts: () => dispatch(contactsOperations.getContacts()),
+  getContacts: () => dispatch(getContacts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
