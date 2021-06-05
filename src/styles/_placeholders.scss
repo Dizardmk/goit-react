@@ -3,12 +3,13 @@
 }
 
 %input {
-  border: 1px solid lightgray;
+  width: 268px;
+  border: 1px solid $border-color;
   border-radius: 4px;
   padding: 5px;
-  margin: 10px 0 20px 0;
+  margin: 5px 0 15px 0;
 
   &:focus {
-    outline-color: #007bff;
+    outline-color: $accent-color;
   }
 }

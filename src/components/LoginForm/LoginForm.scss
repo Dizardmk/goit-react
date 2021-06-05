@@ -1,6 +1,17 @@
 @import 'styles/shared';
 
-.contactEditor {
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 15px;
+  }
+}
+
+.loginForm {
   display: flex;
   flex-direction: column;
   width: 300px;

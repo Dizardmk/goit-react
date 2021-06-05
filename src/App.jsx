@@ -1,45 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getContacts } from './redux/contacts/contacts-operations';
-import {
-  getContactsLenght,
-  getLoading,
-} from './redux/contacts/contacts-selectors';
+import React, { Suspense, lazy } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import routes from './routes';
 import Section from './components/Section';
-import ContactEditor from './components/ContactEditor';
-import ContactFilter from './components/ContactFilter';
-import ContactList from './components/ContactList';
+import AppBar from './components/AppBar/AppBar';
 import Spinner from './components/Spinner';
 
-class App extends Component {
-  componentDidMount() {
-    this.props.getContacts();
-  }
+const HomePage = lazy(() =>
+  import('./pages/HomePage' /* webpackChunkName: "home-page" */),
+);
+const RegisterPage = lazy(() =>
+  import('./pages/RegisterPage' /* webpackChunkName: "register-page" */),
+);
+const LoginPage = lazy(() =>
+  import('./pages/LoginPage' /* webpackChunkName: "login-page" */),
+);
+const ContactsPage = lazy(() =>
+  import('./pages/ContactsPage' /* webpackChunkName: "contacts-page" */),
+);
 
-  render() {
-    const { contactsLenght, isLoadingContacts } = this.props;
-    return (
-      <>
-        <Section title="Phonebook">
-          <ContactEditor />
-        </Section>
-        <Section title="Contacts">
-          {contactsLenght > 0 && <ContactFilter />}
-          <ContactList />
-        </Section>
-        {isLoadingContacts && <Spinner />}
-      </>
-    );
-  }
-}
+const App = () => (
+  <>
+    <Section>
+      <AppBar />
+    </Section>
 
-const mapStateToProps = state => ({
-  contactsLenght: getContactsLenght(state),
-  isLoadingContacts: getLoading(state),
-});
+    <Suspense fallback={<Spinner />}>
+      <Switch>
+        <Route path={routes.home} component={HomePage} exact />
+        <Route path={routes.register} component={RegisterPage} />
+        <Route path={routes.login} component={LoginPage} />
+        <Route path={routes.contacts} component={ContactsPage} />
+      </Switch>
+    </Suspense>
+  </>
+);
 
-const mapDispatchToProps = dispatch => ({
-  getContacts: () => dispatch(getContacts()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

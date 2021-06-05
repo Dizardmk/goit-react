@@ -1,0 +1,21 @@
+@import 'styles/shared';
+
+.navList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+
+  &__item:not(:last-child) {
+    margin-right: 20px;
+  }
+  &__link {
+    color: black;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  &__link--active {
+    color: $accent-color;
+    font-weight: 600;
+  }
+}
