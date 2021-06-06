@@ -8,8 +8,6 @@ const HomePage = () => (
         ✌🏻
       </span>
     </h1>
-    <br />
-    <p>maybe you want to Login or Register?</p>
   </Section>
 );
 

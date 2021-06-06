@@ -1,6 +1,10 @@
-import React, { Suspense, lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { Component, Suspense, lazy } from 'react';
+import { Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getCurrentUser } from './redux/auth/auth-operations';
 import routes from './routes';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 import Section from './components/Section';
 import AppBar from './components/AppBar/AppBar';
 import Spinner from './components/Spinner';
@@ -18,21 +22,45 @@ const ContactsPage = lazy(() =>
   import('./pages/ContactsPage' /* webpackChunkName: "contacts-page" */),
 );
 
-const App = () => (
-  <>
-    <Section>
-      <AppBar />
-    </Section>
+class App extends Component {
+  componentDidMount() {
+    this.props.getCurrentUser();
+  }
 
-    <Suspense fallback={<Spinner />}>
-      <Switch>
-        <Route path={routes.home} component={HomePage} exact />
-        <Route path={routes.register} component={RegisterPage} />
-        <Route path={routes.login} component={LoginPage} />
-        <Route path={routes.contacts} component={ContactsPage} />
-      </Switch>
-    </Suspense>
-  </>
-);
+  render() {
+    return (
+      <Section>
+        <AppBar />
 
-export default App;
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <PublicRoute exact path={routes.home} component={HomePage} />
+            <PublicRoute
+              restricted
+              path={routes.register}
+              redirectTo={routes.contacts}
+              component={RegisterPage}
+            />
+            <PublicRoute
+              restricted
+              path={routes.login}
+              redirectTo={routes.contacts}
+              component={LoginPage}
+            />
+            <PrivateRoute
+              path={routes.contacts}
+              redirectTo={routes.login}
+              component={ContactsPage}
+            />
+          </Switch>
+        </Suspense>
+      </Section>
+    );
+  }
+}
+
+const mapDispatchToProps = {
+  getCurrentUser,
+};
+
+export default connect(null, mapDispatchToProps)(App);

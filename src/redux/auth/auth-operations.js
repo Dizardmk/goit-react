@@ -17,6 +17,7 @@ export const register = registerFormData => async dispatch => {
 
   try {
     const { data } = await axios.post('/users/signup', registerFormData);
+    token.set(data.token);
     dispatch(actions.registerSuccess(data));
   } catch (error) {
     dispatch(actions.registerError(error.message));
@@ -29,6 +30,7 @@ export const login = loginFormData => async dispatch => {
 
   try {
     const { data } = await axios.post('/users/login', loginFormData);
+    token.set(data.token);
     dispatch(actions.loginSuccess(data));
   } catch (error) {
     dispatch(actions.loginError(error.message));
@@ -40,15 +42,21 @@ export const logout = () => async dispatch => {
   dispatch(actions.logoutRequest());
 
   try {
-    const { data } = await axios.post('/users/logout');
-    dispatch(actions.logoutSuccess(data));
+    await axios.post('/users/logout');
+    token.unset();
+    dispatch(actions.logoutSuccess());
   } catch (error) {
     dispatch(actions.logoutError(error.message));
   }
 };
 
 // getCurrentUser
-export const getCurrentUser = () => async dispatch => {
+export const getCurrentUser = () => async (dispatch, getState) => {
+  const {
+    auth: { token: persistedToken },
+  } = getState();
+  if (!persistedToken) return;
+  token.set(persistedToken);
   dispatch(actions.getCurrentUserRequest());
 
   try {

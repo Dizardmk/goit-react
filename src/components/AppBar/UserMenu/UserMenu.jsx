@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { getUsername } from '../../../redux/auth/auth-selectors';
+import { logout } from '../../../redux/auth/auth-operations';
 import defaultImage from './defaultImage.png';
 import './UserMenu.scss';
 
@@ -27,4 +28,8 @@ const mapStateToProps = state => ({
   username: getUsername(state),
 });
 
-export default connect(mapStateToProps)(UserMenu);
+const mapDispatchToProps = {
+  onLogout: logout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);

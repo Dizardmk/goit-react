@@ -2,8 +2,8 @@
 
 .contactEditor {
   display: flex;
-  flex-direction: column;
-  width: 300px;
+  justify-content: center;
+  align-items: flex-end;
   border: 1px solid $border-color;
   border-radius: 4px;
   padding: 15px;
@@ -13,7 +13,14 @@
   }
 
   &__input {
-    @extend %input;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px 15px 0 0;
+
+    &:focus {
+      outline-color: $accent-color;
+    }
   }
 
   &__button {

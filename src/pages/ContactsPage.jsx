@@ -21,12 +21,12 @@ class ContactsPage extends Component {
 
     return (
       <>
-        <Section title="Phonebook">
+        <Section>
           <ContactEditor />
         </Section>
         <Section title="Contacts">
           {contactsLenght > 0 && <ContactFilter />}
-          {!isLoadingContacts && <ContactList />}
+          <ContactList />
           {isLoadingContacts && <Spinner />}
         </Section>
       </>

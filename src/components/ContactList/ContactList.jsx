@@ -7,15 +7,16 @@ import './ContactList.scss';
 const ContactList = ({ contacts, onDeleteContact }) => (
   <>
     {contacts.length === 0 ? (
-      <p>No contact here yet 🙈</p>
+      <p>We didn't find anything 😢</p>
     ) : (
       <div className="contactList">
         <ul className="contactList__list">
           {contacts.map(({ id, name, number }) => (
             <li className="contactList__item" key={id}>
-              <span>
-                {name}: {number}
-              </span>
+              <div className="contactList__item-container">
+                <span>{name}</span>
+                <span>{number}</span>
+              </div>
               <button
                 className="contactList__button"
                 onClick={() => onDeleteContact(id)}
@@ -25,7 +26,7 @@ const ContactList = ({ contacts, onDeleteContact }) => (
             </li>
           ))}
         </ul>
-        <span>{contacts.length} Contacts</span>
+        <b>{contacts.length} Contacts</b>
       </div>
     )}
   </>
