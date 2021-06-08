@@ -26,6 +26,21 @@ export const addContact = (name, number) => async dispatch => {
   }
 };
 
+// edit
+export const editContact =
+  ({ id, name, number }) =>
+  async dispatch => {
+    const update = { name, number };
+    dispatch(actions.editContactRequest());
+
+    try {
+      const { data } = await axios.patch(`/contacts/${id}`, update);
+      dispatch(actions.editContactSuccess(data));
+    } catch (error) {
+      dispatch(actions.editContactError(error.message));
+    }
+  };
+
 // delete
 export const deleteContact = contactId => async dispatch => {
   dispatch(actions.deleteContactRequest());

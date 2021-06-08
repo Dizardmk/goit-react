@@ -16,12 +16,25 @@
     width: 268px;
     border: 1px solid $border-color;
     border-radius: 4px;
-    padding: 0 20px;
+    padding: 10px 20px;
     margin: 0 15px 15px 0;
   }
   &__item-container {
     display: flex;
     flex-direction: column;
+  }
+  &__editInput {
+    width: 150px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    padding: 2px;
+
+    &:focus {
+      outline-color: $accent-color;
+    }
+  }
+  &__editInput:not(:last-child) {
+    margin-bottom: 8px;
   }
   &__button {
     background-color: #fff;
@@ -31,9 +44,16 @@
     padding: 1px 8px;
     margin-left: 10px;
 
-    &:active {
+    &--edit:active {
+      color: #fff;
+      background-color: $accent-color;
+    }
+    &--delete:active {
       color: #fff;
       background-color: $delete-btn-color;
     }
+  }
+  &__button:not(:last-child) {
+    margin-bottom: 10px;
   }
 }

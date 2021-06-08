@@ -10,6 +10,8 @@ const items = createReducer([], {
   // delete
   [actions.deleteContactSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
+  [actions.editContactSuccess]: (state, { payload }) =>
+    state.map(contact => (contact.id === payload.id ? payload : contact)),
 });
 
 // filter
@@ -26,6 +28,10 @@ const loading = createReducer(false, {
   [actions.addContactRequest]: () => true,
   [actions.addContactSuccess]: () => false,
   [actions.addContactError]: () => false,
+  // edit
+  [actions.editContactRequest]: () => true,
+  [actions.editContactSuccess]: () => false,
+  [actions.editContactError]: () => false,
   // delete
   [actions.deleteContactRequest]: () => true,
   [actions.deleteContactSuccess]: () => false,
