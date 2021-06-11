@@ -1,93 +1,81 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { useState, useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { editContact } from '../../redux/contacts/contacts-operations';
 import './ContactList.scss';
 
-class editContactForm extends Component {
-  state = {
-    id: '',
-    name: '',
-    number: '',
-  };
+export default function ContactEditForm({ contactItem, onCloseContact }) {
+  useEffect(() => {
+    const { id, name, number } = contactItem;
+    setId(id);
+    setName(name);
+    setNumber(number);
+  }, [contactItem]);
 
-  componentDidMount() {
-    const {
-      contactItem: { id, name, number },
-    } = this.props;
+  const [name, setName] = useState('');
+  const handleChangeName = useCallback(event => {
+    setName(event.target.value);
+  }, []);
 
-    this.setState({
-      id,
-      name,
-      number,
-    });
-  }
+  const [number, setNumber] = useState('');
+  const handleChangeNumber = useCallback(event => {
+    setNumber(event.target.value);
+  }, []);
 
-  handleChange = event => {
-    const { name, value } = event.currentTarget;
+  const [id, setId] = useState('');
 
-    this.setState({
-      [name]: value,
-    });
-  };
+  const dispatch = useDispatch();
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      dispatch(editContact({ id, name, number }));
+      onCloseContact();
+    },
+    [dispatch, id, name, number, onCloseContact],
+  );
 
-  handleSubmit = event => {
-    event.preventDefault();
-    this.props.editContact(this.state);
-    this.props.onCloseContact();
-  };
+  return (
+    <>
+      <div className="contactList__item-container">
+        <input
+          className="contactList__editInput"
+          type="text"
+          name="name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+          placeholder={'Name'}
+          required
+          value={name}
+          onChange={handleChangeName}
+        />
+        <input
+          className="contactList__editInput"
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+          placeholder={'Number'}
+          required
+          value={number}
+          onChange={handleChangeNumber}
+        />
+      </div>
 
-  render() {
-    const { name, number } = this.state;
-    const { onCloseContact } = this.props;
-
-    return (
-      <>
-        <div className="contactList__item-container">
-          <input
-            className="contactList__editInput"
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            required
-            value={name}
-            onChange={this.handleChange}
-          />
-          <input
-            className="contactList__editInput"
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-            required
-            value={number}
-            onChange={this.handleChange}
-          />
-        </div>
-
-        <div className="contactList__item-container">
-          <button
-            className="contactList__button contactList__button--edit"
-            type="button"
-            onClick={this.handleSubmit}
-          >
-            Save
-          </button>
-          <button
-            className="contactList__button contactList__button--delete"
-            type="button"
-            onClick={onCloseContact}
-          >
-            Close
-          </button>
-        </div>
-      </>
-    );
-  }
+      <div className="contactList__item-container">
+        <button
+          className="contactList__button contactList__button--edit"
+          type="button"
+          onClick={handleSubmit}
+        >
+          Save
+        </button>
+        <button
+          className="contactList__button contactList__button--delete"
+          type="button"
+          onClick={onCloseContact}
+        >
+          Close
+        </button>
+      </div>
+    </>
+  );
 }
-
-const mapDispatchToProps = {
-  editContact,
-};
-
-export default connect(null, mapDispatchToProps)(editContactForm);

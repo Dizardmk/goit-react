@@ -1,12 +1,12 @@
 import './Spinner.scss';
 
-const Spinner = () => (
-  <div className="lds-ellipsis">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-);
-
-export default Spinner;
+export default function Spinner() {
+  return (
+    <div className="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  );
+}

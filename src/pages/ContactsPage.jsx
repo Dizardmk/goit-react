@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   getContactsLenght,
   getLoading,
@@ -11,36 +11,26 @@ import ContactFilter from '../components/ContactFilter';
 import ContactList from '../components/ContactList';
 import Spinner from '../components/Spinner';
 
-class ContactsPage extends Component {
-  componentDidMount() {
-    this.props.getContacts();
-  }
+export default function ContactsPage() {
+  const dispatch = useDispatch();
 
-  render() {
-    const { contactsLenght, isLoadingContacts } = this.props;
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
 
-    return (
-      <>
-        <Section>
-          <ContactEditor />
-        </Section>
-        <Section title="Contacts">
-          {contactsLenght > 0 && <ContactFilter />}
-          <ContactList />
-          {isLoadingContacts && <Spinner />}
-        </Section>
-      </>
-    );
-  }
+  const contactsLenght = useSelector(getContactsLenght);
+  const isLoadingContacts = useSelector(getLoading);
+
+  return (
+    <>
+      <Section>
+        <ContactEditor />
+      </Section>
+      <Section title="Contacts">
+        {contactsLenght > 0 && <ContactFilter />}
+        <ContactList />
+        {isLoadingContacts && <Spinner />}
+      </Section>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-  contactsLenght: getContactsLenght(state),
-  isLoadingContacts: getLoading(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  getContacts: () => dispatch(getContacts()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactsPage);
