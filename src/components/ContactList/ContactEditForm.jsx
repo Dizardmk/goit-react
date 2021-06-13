@@ -5,12 +5,7 @@ import './ContactList.scss';
 
 export default function ContactEditForm({ contactItem, onCloseContact }) {
   useEffect(() => {
-    const { id, name, number } = contactItem;
-    setUser({
-      id,
-      name,
-      number,
-    });
+    setUser(contactItem);
   }, [contactItem]);
 
   const [user, setUser] = useState({
