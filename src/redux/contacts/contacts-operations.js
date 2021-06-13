@@ -14,17 +14,19 @@ export const getContacts = () => async dispatch => {
 };
 
 // add
-export const addContact = (name, number) => async dispatch => {
-  dispatch(actions.addContactRequest());
+export const addContact =
+  ({ name, number }) =>
+  async dispatch => {
+    dispatch(actions.addContactRequest());
 
-  try {
-    const contact = { name, number };
-    const { data } = await axios.post('/contacts', contact);
-    dispatch(actions.addContactSuccess(data));
-  } catch (error) {
-    dispatch(actions.addContactError(error.message));
-  }
-};
+    try {
+      const contact = { name, number };
+      const { data } = await axios.post('/contacts', contact);
+      dispatch(actions.addContactSuccess(data));
+    } catch (error) {
+      dispatch(actions.addContactError(error.message));
+    }
+  };
 
 // edit
 export const editContact =

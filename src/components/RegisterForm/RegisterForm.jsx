@@ -4,31 +4,22 @@ import { register } from '../../redux/auth/auth-operations';
 import './RegisterForm.scss';
 
 export default function RegisterForm() {
-  const [name, setName] = useState('');
-  const handleChangeName = useCallback(event => {
-    setName(event.target.value);
-  }, []);
-
-  const [email, setEmail] = useState('');
-  const handleChangeEmail = useCallback(event => {
-    setEmail(event.target.value);
-  }, []);
-
-  const [password, setPassword] = useState('');
-  const handleChangePassword = useCallback(event => {
-    setPassword(event.target.value);
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+  const handleChange = useCallback(({ currentTarget: { name, value } }) => {
+    setUser(prev => ({ ...prev, [name]: value }));
   }, []);
 
   const dispatch = useDispatch();
   const handleSubmit = useCallback(
     event => {
       event.preventDefault();
-      dispatch(register({ name, email, password }));
-      setName('');
-      setEmail('');
-      setPassword('');
+      dispatch(register(user));
     },
-    [dispatch, name, email, password],
+    [dispatch, user],
   );
 
   return (
@@ -42,8 +33,8 @@ export default function RegisterForm() {
             required
             type="text"
             name="name"
-            value={name}
-            onChange={handleChangeName}
+            value={user.name}
+            onChange={handleChange}
           />
         </label>
 
@@ -54,8 +45,8 @@ export default function RegisterForm() {
             required
             type="email"
             name="email"
-            value={email}
-            onChange={handleChangeEmail}
+            value={user.email}
+            onChange={handleChange}
           />
         </label>
 
@@ -66,8 +57,8 @@ export default function RegisterForm() {
             required
             type="password"
             name="password"
-            value={password}
-            onChange={handleChangePassword}
+            value={user.password}
+            onChange={handleChange}
           />
         </label>
         <button className="registerForm__button" type="submit">

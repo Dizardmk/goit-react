@@ -5,14 +5,12 @@ import { getContacts } from '../../redux/contacts/contacts-selectors';
 import './ContactEditor.scss';
 
 export default function ContactEditor() {
-  const [name, setName] = useState('');
-  const handleChangeName = useCallback(event => {
-    setName(event.target.value);
-  }, []);
-
-  const [number, setNumber] = useState('');
-  const handleChangeNumber = useCallback(event => {
-    setNumber(event.target.value);
+  const [user, setUser] = useState({
+    name: '',
+    number: '',
+  });
+  const handleChange = useCallback(({ currentTarget: { name, value } }) => {
+    setUser(prev => ({ ...prev, [name]: value }));
   }, []);
 
   const contacts = useSelector(getContacts);
@@ -24,15 +22,17 @@ export default function ContactEditor() {
 
       // contacts duplicate check
       contacts.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase(),
+        ({ name }) => name.toLowerCase() === user.name.toLowerCase(),
       )
-        ? alert(`${name} is alredy in contacts`)
-        : dispatch(addContact(name, number));
+        ? alert(`${user.name} is alredy in contacts`)
+        : dispatch(addContact(user));
 
-      setName('');
-      setNumber('');
+      setUser({
+        name: '',
+        number: '',
+      });
     },
-    [dispatch, name, number, contacts],
+    [dispatch, user, contacts],
   );
 
   return (
@@ -46,8 +46,8 @@ export default function ContactEditor() {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
-          value={name}
-          onChange={handleChangeName}
+          value={user.name}
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -59,8 +59,8 @@ export default function ContactEditor() {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
-          value={number}
-          onChange={handleChangeNumber}
+          value={user.number}
+          onChange={handleChange}
         />
       </label>
       <button className="contactEditor__button" type="submit">

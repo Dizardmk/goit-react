@@ -6,31 +6,30 @@ import './ContactList.scss';
 export default function ContactEditForm({ contactItem, onCloseContact }) {
   useEffect(() => {
     const { id, name, number } = contactItem;
-    setId(id);
-    setName(name);
-    setNumber(number);
+    setUser({
+      id,
+      name,
+      number,
+    });
   }, [contactItem]);
 
-  const [name, setName] = useState('');
-  const handleChangeName = useCallback(event => {
-    setName(event.target.value);
+  const [user, setUser] = useState({
+    id: '',
+    name: '',
+    number: '',
+  });
+  const handleChange = useCallback(({ currentTarget: { name, value } }) => {
+    setUser(prev => ({ ...prev, [name]: value }));
   }, []);
-
-  const [number, setNumber] = useState('');
-  const handleChangeNumber = useCallback(event => {
-    setNumber(event.target.value);
-  }, []);
-
-  const [id, setId] = useState('');
 
   const dispatch = useDispatch();
   const handleSubmit = useCallback(
     event => {
       event.preventDefault();
-      dispatch(editContact({ id, name, number }));
+      dispatch(editContact(user));
       onCloseContact();
     },
-    [dispatch, id, name, number, onCloseContact],
+    [dispatch, user, onCloseContact],
   );
 
   return (
@@ -44,8 +43,8 @@ export default function ContactEditForm({ contactItem, onCloseContact }) {
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           placeholder={'Name'}
           required
-          value={name}
-          onChange={handleChangeName}
+          value={user.name}
+          onChange={handleChange}
         />
         <input
           className="contactList__editInput"
@@ -55,8 +54,8 @@ export default function ContactEditForm({ contactItem, onCloseContact }) {
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           placeholder={'Number'}
           required
-          value={number}
-          onChange={handleChangeNumber}
+          value={user.number}
+          onChange={handleChange}
         />
       </div>
 

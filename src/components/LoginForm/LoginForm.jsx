@@ -4,26 +4,21 @@ import { login } from '../../redux/auth/auth-operations';
 import './LoginForm.scss';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('');
-  const handleChangeEmail = useCallback(event => {
-    setEmail(event.target.value);
-  }, []);
-
-  const [password, setPassword] = useState('');
-  const handleChangePassword = useCallback(event => {
-    setPassword(event.target.value);
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+  const handleChange = useCallback(({ currentTarget: { name, value } }) => {
+    setUser(prev => ({ ...prev, [name]: value }));
   }, []);
 
   const dispatch = useDispatch();
-
   const handleSubmit = useCallback(
     event => {
       event.preventDefault();
-      dispatch(login({ email, password }));
-      setEmail('');
-      setPassword('');
+      dispatch(login(user));
     },
-    [dispatch, email, password],
+    [dispatch, user],
   );
 
   return (
@@ -37,8 +32,8 @@ export default function LoginForm() {
             required
             type="email"
             name="email"
-            value={email}
-            onChange={handleChangeEmail}
+            value={user.email}
+            onChange={handleChange}
           />
         </label>
 
@@ -49,8 +44,8 @@ export default function LoginForm() {
             required
             type="password"
             name="password"
-            value={password}
-            onChange={handleChangePassword}
+            value={user.password}
+            onChange={handleChange}
           />
         </label>
         <button className="loginForm__button" type="submit">
