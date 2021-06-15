@@ -174,7 +174,15 @@ npm install --save gh-pages
 - `cdm`→ componentDidMount() {}
 - `cdu`→ componentDidUpdate(prevProps, prevState) {}
 - `cwun`→ componentWillUnmount() {}
-- `rcc`→ react class component
-- `sfc`→ stateless function component
-- `rcredux`
-- `rfcredux`
+- React Class Component
+  - `rcc` - react class component
+  - `rce` - react class export component
+  - `rccp` - react class component with PropTypes
+  - `rcredux` - react class component Redux
+  - `rcreduxp` - react class component Redux with PropTypes
+- React Functional Component
+  - `rfc` - react functional component
+  - `rfce` - react functional export component
+  - `rfcp` - react functional component with PropTypes
+  - `rfcredux` - react functional component Redux
+  - `rfcreduxp` - react functional component Redux with PropTypes
