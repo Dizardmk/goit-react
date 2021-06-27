@@ -7,13 +7,13 @@ npx create-react-app .
 ## Sass
 
 ```sh
-npm install sass
+npm i sass
 ```
 
 ## Normalize
 
 ```sh
-npm install modern-normalize
+npm i modern-normalize
 ```
 
 Подключить `import 'modern-normalize/modern-normalize.css';` в `./index.js`
@@ -21,7 +21,7 @@ npm install modern-normalize
 ## BrowserRouter. Switch, Router, Link, Navlink
 
 ```sh
-npm install react-router-dom
+npm i react-router-dom
 ```
 
 В `./index.js` добавить:
@@ -37,8 +37,7 @@ import { BrowserRouter } from 'react-router-dom';
 ## Redux
 
 ```sh
-npm i redux
-npm i react-redux
+npm i redux react-redux
 ```
 
 В `./index.js` добавить:
@@ -54,7 +53,7 @@ import {Provider} from 'react-redux'
 ## Redux Toolkit
 
 ```sh
-npm install @reduxjs/toolkit
+npm i @reduxjs/toolkit
 ```
 
 ## Redux Persist
@@ -62,7 +61,7 @@ npm install @reduxjs/toolkit
 Используется для работы с `local-storage`.
 
 ```sh
-npm install redux-persist
+npm i redux-persist
 ```
 
 ## Redux DevTools
@@ -89,10 +88,10 @@ to = "/index.html"
 status = 200
 ```
 
-Далее, вводим в терминале следующую команду:
+Далее, вводим в терминале следующую команду (ставим один раз глобально):
 
 ```sh
-npm install netlify-cli -g
+npm i netlify-cli -g
 ```
 
 Теперь нам нужно залогиниться в свою учетку (откроется браузер, с подтверждением
@@ -119,7 +118,7 @@ netlify login
 ## Деплой приложения на Github (не работает с BrowserRouter)
 
 ```sh
-npm install --save gh-pages
+npm i gh-pages
 ```
 
 В файле `package.json` добавим следующее:
@@ -145,14 +144,13 @@ npm install --save gh-pages
 
 - <https://www.npmjs.com/package/prop-types>
 - <https://www.npmjs.com/package/classnames>
-- <https://www.npmjs.com/package/shortid> или
-  <https://www.npmjs.com/package/uuid>
+- <https://www.npmjs.com/package/uuid>
 - <https://www.npmjs.com/package/axios>
 - <https://github.com/mhnpd/react-loader-spinner>
 
 ## Полезные сниппеты
 
-Для работы, нужно установить два расширения:
+Для работы сниппетов, необходимо установить эти расширения:
 [es7-react-js-snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
 и
 [simple-react-snippets](https://marketplace.visualstudio.com/items?itemName=burkeholland.simple-react-snippets)
